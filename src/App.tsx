@@ -1,5 +1,11 @@
+import ImageController from './components/imageController/ImageController'
+
 function App() {
-  return <></>
+  return (
+    <>
+      <ImageController />
+    </>
+  )
 }
 
 export default App
