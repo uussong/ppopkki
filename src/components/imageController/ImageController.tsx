@@ -1,13 +1,17 @@
-import { useState } from 'react'
+import { MutableRefObject, useState } from 'react'
 import ImageInput from './ImageInput'
 import ImageList from './ImageList'
 
-function ImageController() {
+interface ImageControllerProps {
+  printRef: MutableRefObject<null>
+}
+
+function ImageController({ printRef }: ImageControllerProps) {
   const [imgList, setImgList] = useState<string[]>([])
 
   return (
     <section>
-      {imgList && <ImageList imgList={imgList} />}
+      <ImageList printRef={printRef} imgList={imgList} />
       <ImageInput
         setImgList={(imgList) => {
           setImgList((prevData) => [...prevData, ...imgList])

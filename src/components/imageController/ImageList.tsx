@@ -1,14 +1,19 @@
+import { MutableRefObject } from 'react'
+
 interface ImageListProps {
+  printRef: MutableRefObject<null>
   imgList: string[]
 }
 
-function ImageList({ imgList }: ImageListProps) {
+function ImageList({ printRef, imgList }: ImageListProps) {
   return (
-    <>
+    <ul ref={printRef}>
       {imgList.map((img, idx) => (
-        <img key={idx} src={img} />
+        <li>
+          <img key={idx} src={img} />
+        </li>
       ))}
-    </>
+    </ul>
   )
 }
 
