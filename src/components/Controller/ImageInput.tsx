@@ -23,13 +23,17 @@ function ImageInput({ setImgList }: ImageInputProps) {
   }
 
   return (
-    <input
-      type="file"
-      accept="image/*"
-      ref={imgRef}
-      onChange={getImg}
-      multiple
-    />
+    <>
+      <label htmlFor="image">사진 선택</label>
+      <input
+        type="file"
+        id="image"
+        accept="image/*"
+        ref={imgRef}
+        onChange={getImg}
+        multiple
+      />
+    </>
   )
 }
 
