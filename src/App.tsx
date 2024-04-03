@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import Controller from './components/Controller/Controller'
+import Controller from './components/controller/Controller'
 import ImageList from './components/imageList/ImageList'
 
 function App() {
@@ -18,7 +18,12 @@ function App() {
           setImgList((prevData) => [...prevData, ...imgList])
         }}
       />
-      <ImageList printRef={printRef} imgList={imgList} />
+      <ImageList
+        printRef={printRef}
+        imgList={imgList}
+        width={width}
+        height={height}
+      />
     </>
   )
 }
