@@ -1,20 +1,24 @@
 import { useRef, useState } from 'react'
-import PrintController from './components/printController/PrintController'
-import ImageController from './components/imageController/ImageController'
+import Controller from './components/Controller/Controller'
+import ImageList from './components/imageList/ImageList'
 
 function App() {
   const printRef = useRef(null)
+  const [imgList, setImgList] = useState<string[]>([])
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
 
   return (
     <>
-      <PrintController
+      <Controller
         printRef={printRef}
         setWidth={(width: number) => setWidth(width)}
         setHeight={(height: number) => setHeight(height)}
+        setImgList={(imgList) => {
+          setImgList((prevData) => [...prevData, ...imgList])
+        }}
       />
-      <ImageController printRef={printRef} />
+      <ImageList printRef={printRef} imgList={imgList} />
     </>
   )
 }

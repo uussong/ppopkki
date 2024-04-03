@@ -2,18 +2,21 @@ import { MutableRefObject } from 'react'
 import { useReactToPrint } from 'react-to-print'
 import PrintButton from './PrintButton'
 import SizeInputGroup from './SizeInputGroup'
+import ImageInput from './ImageInput'
 
-interface PrintControllerProps {
+interface ControllerProps {
   printRef: MutableRefObject<null>
   setWidth: (width: number) => void
   setHeight: (width: number) => void
+  setImgList: (imgList: string[]) => void
 }
 
-function PrintController({
+function Controller({
   printRef,
   setWidth,
   setHeight,
-}: PrintControllerProps) {
+  setImgList,
+}: ControllerProps) {
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
   })
@@ -22,8 +25,9 @@ function PrintController({
     <section>
       <SizeInputGroup setWidth={setWidth} setHeight={setHeight} />
       <PrintButton handlePrint={handlePrint} />
+      <ImageInput setImgList={setImgList} />
     </section>
   )
 }
 
-export default PrintController
+export default Controller
