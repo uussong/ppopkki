@@ -31,7 +31,7 @@ function SizeInputGroup({ setWidth, setHeight }: SizeInputGroupProps) {
     <form onSubmit={handleSubmit}>
       <input type="number" placeholder="너비" onChange={handleWidth} />
       <input type="number" placeholder="높이" onChange={handleHeight} />
-      <button>입력!</button>
+      <button disabled={!(inputWidth && inputHeight)}>입력!</button>
     </form>
   )
 }
