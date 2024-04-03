@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 interface SizeInputGroupProps {
   setWidth: (width: number) => void
@@ -6,21 +6,24 @@ interface SizeInputGroupProps {
 }
 
 function SizeInputGroup({ setWidth, setHeight }: SizeInputGroupProps) {
-  let width = 0
-  let height = 0
+  const [inputWidth, setInputWidth] = useState(0)
+  const [inputHeight, setInputHeight] = useState(0)
+
   const handleWidth = (e: ChangeEvent<HTMLInputElement>) => {
-    width = parseInt(e.target.value)
+    const width = parseInt(e.target.value)
+    setInputWidth(width)
   }
 
   const handleHeight = (e: ChangeEvent<HTMLInputElement>) => {
-    height = parseInt(e.target.value)
+    const height = parseInt(e.target.value)
+    setInputHeight(height)
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (width && height) {
-      setWidth(width)
-      setHeight(height)
+    if (inputWidth && inputHeight) {
+      setWidth(inputWidth)
+      setHeight(inputHeight)
     }
   }
 
