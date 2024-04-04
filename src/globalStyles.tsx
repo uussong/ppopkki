@@ -3,6 +3,13 @@ import reset from 'emotion-reset'
 
 export const globalStyles = css`
   ${reset}
+  * {
+    box-sizing: inherit;
+  }
+
+  html {
+    box-sizing: border-box;
+  }
 
   input,
   button {

@@ -10,8 +10,8 @@ interface ImageListProps {
 
 function ImageList({ printRef, imgList, width, height }: ImageListProps) {
   return (
-    <section>
-      <ul ref={printRef}>
+    <section css={sectionStyles}>
+      <ul ref={printRef} css={listStyles}>
         {imgList.map((img, idx) => (
           <li css={listItemStyles(width, height)}>
             <img key={idx} src={img} css={imageStyles} />
@@ -23,6 +23,18 @@ function ImageList({ printRef, imgList, width, height }: ImageListProps) {
 }
 
 export default ImageList
+
+const sectionStyles = css`
+  grid-area: preview;
+  padding: 12px;
+  background-color: #eee;
+`
+
+const listStyles = css`
+  width: 420px;
+  height: 594px;
+  background-color: #fff;
+`
 
 const listItemStyles = (width: number, height: number) => css`
   width: ${width}px;
