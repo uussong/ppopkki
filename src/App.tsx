@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useReactToPrint } from 'react-to-print'
 import { css } from '@emotion/react'
 import Controller from './components/controller/Controller'
-import ImageList from './components/imageList/ImageList'
+import ImageList from './components/preview/Preview'
 import PrintButton from './components/controller/PrintButton'
 
 function App() {
@@ -10,7 +10,6 @@ function App() {
   const [imgList, setImgList] = useState<string[]>([])
   const [width, setWidth] = useState(0)
   const [height, setHeight] = useState(0)
-  console.log(width, height)
 
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
