@@ -13,8 +13,8 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
   const [activePage, setActivePage] = useState(0)
   const MAX_IMAGES_PER_PAGE =
     width && height
-      ? Math.floor((A4.WIDTH - 40) / width) *
-        Math.floor((A4.HEIGHT - 40) / height)
+      ? Math.floor(A4.WIDTH - (A4.PADDING * 2) / width) *
+        Math.floor(A4.HEIGHT - (A4.PADDING * 2) / height)
       : 0
 
   const imagePages = []
@@ -100,7 +100,7 @@ const listStyles = css`
   gap: 5px;
   width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP}px;
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP}px;
-  padding: 20px;
+  padding: ${A4.PADDING}px;
   background-color: #fff;
 
   @media print {
