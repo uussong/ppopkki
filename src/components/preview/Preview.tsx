@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react'
+import { MutableRefObject, useState } from 'react'
 import { css } from '@emotion/react'
 import { A4, SCALE_FACTOR } from '../../constants/paper'
 
@@ -10,15 +10,48 @@ interface PreviewProps {
 }
 
 function Preview({ printRef, imgList, width, height }: PreviewProps) {
+  const [activePage, setActivePage] = useState(0)
+  const MAX_IMAGES_PER_PAGE =
+    width && height
+      ? Math.floor((A4.WIDTH - 40) / width) *
+        Math.floor((A4.HEIGHT - 40) / height)
+      : 0
+
+  const imagePages = []
+  for (let i = 0; i < imgList.length; i += MAX_IMAGES_PER_PAGE) {
+    imagePages.push(imgList.slice(i, i + MAX_IMAGES_PER_PAGE))
+  }
+
+  const handlePageButtonClick = (idx: number) => {
+    setActivePage(idx)
+  }
+
   return (
     <section css={sectionStyles}>
-      <ul ref={printRef} css={listStyles}>
-        {imgList.map((img, idx) => (
-          <li key={idx} css={listItemStyles(width, height)}>
-            <img src={img} css={imageStyles} />
-          </li>
+      <div ref={printRef} css={slideStyles}>
+        {imagePages.map((imagePage, idx) => (
+          <div key={idx} css={wrapperStyles(activePage)}>
+            <ul css={listStyles}>
+              {imagePage.map((img, idx) => (
+                <li key={idx} css={listItemStyles(width, height)}>
+                  <img src={img} css={imageStyles} />
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
+      {imagePages.length > 1 && (
+        <ul css={buttonListStyles}>
+          {imagePages.map((_, idx: number) => (
+            <li key={idx}>
+              <button onClick={() => handlePageButtonClick(idx)}>
+                {idx + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   )
 }
@@ -27,8 +60,37 @@ export default Preview
 
 const sectionStyles = css`
   grid-area: preview;
+  width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP + 24}px;
+  height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
+`
+
+const slideStyles = css`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  overflow: hidden;
+
+  @media print {
+    display: block;
+    width: ${A4.WIDTH}mm;
+    height: ${A4.HEIGHT}mm;
+    background-color: transparent;
+    overflow: visible;
+  }
+`
+
+const wrapperStyles = (idx: number) => css`
+  width: 100%;
+  height: 100%;
   padding: 12px;
   background-color: #eee;
+  transform: translateX(-${idx * 100}%);
+
+  @media print {
+    background-color: transparent;
+    transform: none;
+  }
 `
 
 const listStyles = css`
@@ -63,4 +125,11 @@ const imageStyles = css`
   width: 100%;
   height: 100%;
   object-fit: contain;
+`
+
+const buttonListStyles = css`
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 12px;
 `
