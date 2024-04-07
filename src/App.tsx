@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useReactToPrint } from 'react-to-print'
 import { css } from '@emotion/react'
 import Controller from './components/controller/Controller'
-import ImageList from './components/preview/Preview'
+import Preview from './components/preview/Preview'
 import PrintButton from './components/controller/PrintButton'
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
           }}
         />
         <PrintButton handlePrint={handlePrint} />
-        <ImageList
+        <Preview
           printRef={printRef}
           imgList={imgList}
           width={width}
