@@ -1,39 +1,37 @@
-import { RefObject, useRef } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface ImageInputProps {
   setImgList: (imgList: string[]) => void
 }
 
+interface FormInput {
+  imgFile: FileList
+}
+
 function ImageInput({ setImgList }: ImageInputProps) {
-  const imgRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null)
+  const { register, handleSubmit } = useForm<FormInput>()
 
-  const getImg = () => {
-    const fileList = Array.from(imgRef.current?.files || [])
-
-    if (fileList && fileList.length > 0) {
-      fileList.forEach((file) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-          const imgUrl = reader.result as string
-          setImgList([imgUrl])
-        }
-        reader.readAsDataURL(file)
-      })
+  const onSubmit: SubmitHandler<FormInput> = ({ imgFile }) => {
+    const urlList: string[] = []
+    for (const file of imgFile) {
+      const url = URL.createObjectURL(file)
+      urlList.push(url)
     }
+    setImgList(urlList)
   }
 
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="image">사진 선택</label>
       <input
         type="file"
         id="image"
         accept="image/*"
-        ref={imgRef}
-        onChange={getImg}
+        {...register('imgFile')}
         multiple
       />
-    </>
+      <input type="submit" />
+    </form>
   )
 }
 
