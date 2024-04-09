@@ -16,6 +16,7 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
       ? Math.floor((A4.WIDTH - A4.PADDING * 2) / width) *
         Math.floor((A4.HEIGHT - A4.PADDING * 2) / height)
       : 0
+  const array = Array.from({ length: MAX_IMAGES_PER_PAGE })
 
   const imagePages = []
   for (let i = 0; i < imgList.length; i += MAX_IMAGES_PER_PAGE) {
@@ -28,18 +29,34 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
 
   return (
     <section css={sectionStyles}>
-      <div ref={printRef} css={slideStyles}>
-        {imagePages.map((imagePage, idx) => (
-          <div key={idx} css={wrapperStyles(activePage)}>
-            <ul css={listStyles}>
-              {imagePage.map((img, idx) => (
-                <li key={idx} css={listItemStyles(width, height)}>
-                  <img src={img} css={imageStyles} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div ref={printRef} css={slideWrapperStyles}>
+        {imgList.length > 0 ? (
+          <>
+            {imagePages.map((imagePage, idx) => (
+              <div css={slideStyles(activePage)}>
+                <div key={idx} css={wrapperStyles}>
+                  <ul css={listStyles}>
+                    {imagePage.map((img, idx) => (
+                      <li key={idx} css={listItemStyles(width, height)}>
+                        <img src={img} css={imageStyles} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <div css={wrapperStyles}>
+              <ul css={listStyles}>
+                {array.map((_, index) => (
+                  <li key={index} css={listItemStyles(width, height)}></li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
       </div>
       {imagePages.length > 1 && (
         <ul css={buttonListStyles}>
@@ -64,7 +81,7 @@ const sectionStyles = css`
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
 `
 
-const slideStyles = css`
+const slideWrapperStyles = css`
   display: flex;
   width: 100%;
   height: 100%;
@@ -80,12 +97,17 @@ const slideStyles = css`
   }
 `
 
-const wrapperStyles = (idx: number) => css`
+const slideStyles = (idx: number) => css`
+  width: 100%;
+  height: 100%;
+  transform: translateX(-${idx * 100}%);
+`
+
+const wrapperStyles = css`
   width: 100%;
   height: 100%;
   padding: 12px;
   background-color: #eee;
-  transform: translateX(-${idx * 100}%);
 
   @media print {
     background-color: transparent;
