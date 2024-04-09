@@ -22,6 +22,8 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
     handleSubmit,
     watch,
   } = useForm<FormInput>()
+  const width = watch('width')
+  const height = watch('height')
   const imgFile = watch('imgFile')
 
   const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
@@ -71,13 +73,19 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         )}
         <input type="submit" />
       </form>
-      <label htmlFor="image">사진 선택</label>
+      <label
+        htmlFor="image"
+        css={labelStyles(width === undefined || height === undefined)}
+      >
+        사진 선택
+      </label>
       <input
         type="file"
         id="image"
         accept="image/*"
         {...register('imgFile')}
         multiple
+        disabled={width === undefined || height === undefined}
       />
     </section>
   )
@@ -87,4 +95,8 @@ export default Controller
 
 const sectionStyles = css`
   grid-area: input;
+`
+
+const labelStyles = (isDisabled: boolean) => css`
+  cursor: ${isDisabled ? 'defalut' : 'pointer'};
 `
