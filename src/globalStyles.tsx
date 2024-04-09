@@ -16,8 +16,8 @@ export const globalStyles = css`
     all: unset;
   }
 
-  label,
-  button {
+  button,
+  input[type='submit'] {
     cursor: pointer;
 
     :disabled {
