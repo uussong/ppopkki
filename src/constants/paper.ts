@@ -1,7 +1,7 @@
 export const A4 = {
   WIDTH: 210,
   HEIGHT: 297,
-  PADDING: 20,
+  PADDING: 10,
 }
 
 export const SCALE_FACTOR = {

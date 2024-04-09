@@ -100,7 +100,7 @@ const listStyles = css`
   gap: 5px;
   width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP}px;
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP}px;
-  padding: ${A4.PADDING}px;
+  padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
   background-color: #fff;
 
   @media print {
