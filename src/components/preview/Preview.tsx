@@ -33,8 +33,8 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
         {imgList.length > 0 ? (
           <>
             {imagePages.map((imagePage, idx) => (
-              <div css={slideStyles(activePage)}>
-                <div key={idx} css={wrapperStyles}>
+              <div key={idx} css={slideStyles(activePage)}>
+                <div css={wrapperStyles}>
                   <ul css={listStyles}>
                     {imagePage.map((img, idx) => (
                       <li key={idx} css={listItemStyles(width, height)}>
