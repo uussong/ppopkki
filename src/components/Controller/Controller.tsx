@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { css } from '@emotion/react'
 import { A4 } from '../../constants/paper'
@@ -19,18 +20,25 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm<FormInput>()
+  const imgFile = watch('imgFile')
 
-  const onSubmit: SubmitHandler<FormInput> = ({ width, height, imgFile }) => {
+  const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
     setHeight(height)
     setWidth(width)
-    const urlList: string[] = []
-    for (const file of imgFile) {
-      const url = URL.createObjectURL(file)
-      urlList.push(url)
-    }
-    setImgList(urlList)
   }
+
+  useEffect(() => {
+    if (imgFile && imgFile.length > 0) {
+      const urlList: string[] = []
+      for (const file of imgFile) {
+        const url = URL.createObjectURL(file)
+        urlList.push(url)
+      }
+      setImgList(urlList)
+    }
+  }, [imgFile])
 
   return (
     <section css={sectionStyles}>
@@ -61,16 +69,16 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         {errors.height?.type === 'max' && (
           <p>최대 너비는 {A4.HEIGHT - A4.PADDING * 2}mm입니다</p>
         )}
-        <label htmlFor="image">사진 선택</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          {...register('imgFile')}
-          multiple
-        />
         <input type="submit" />
       </form>
+      <label htmlFor="image">사진 선택</label>
+      <input
+        type="file"
+        id="image"
+        accept="image/*"
+        {...register('imgFile')}
+        multiple
+      />
     </section>
   )
 }
