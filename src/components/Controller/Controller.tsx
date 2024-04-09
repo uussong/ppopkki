@@ -65,9 +65,9 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
             max: A4.HEIGHT - A4.PADDING * 2,
           })}
         />
-        {errors.height?.type === 'required' && <p>너비를 입력해주세요</p>}
+        {errors.height?.type === 'required' && <p>높이를 입력해주세요</p>}
         {errors.height?.type === 'max' && (
-          <p>최대 너비는 {A4.HEIGHT - A4.PADDING * 2}mm입니다</p>
+          <p>최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다</p>
         )}
         <input type="submit" />
       </form>
