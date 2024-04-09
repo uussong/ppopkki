@@ -25,7 +25,10 @@ function App() {
             setImgList((prevData) => [...prevData, ...imgList])
           }}
         />
-        <PrintButton handlePrint={handlePrint} />
+        <PrintButton
+          handlePrint={handlePrint}
+          disabled={width === 0 || height === 0 || imgList.length === 0}
+        />
         <Preview
           printRef={printRef}
           imgList={imgList}

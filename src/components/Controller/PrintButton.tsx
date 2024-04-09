@@ -2,12 +2,15 @@ import { css } from '@emotion/react'
 
 interface PrintButtonProps {
   handlePrint: () => void
+  disabled: boolean
 }
 
-function PrintButton({ handlePrint }: PrintButtonProps) {
+function PrintButton({ handlePrint, disabled }: PrintButtonProps) {
   return (
     <section css={styles}>
-      <button onClick={handlePrint}>뽑기</button>
+      <button onClick={handlePrint} disabled={disabled}>
+        뽑기
+      </button>
     </section>
   )
 }
