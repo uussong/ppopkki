@@ -25,15 +25,15 @@ function App() {
             setImgList((prevData) => [...prevData, ...imgList])
           }}
         />
-        <PrintButton
-          handlePrint={handlePrint}
-          disabled={width === 0 || height === 0 || imgList.length === 0}
-        />
         <Preview
           printRef={printRef}
           imgList={imgList}
           width={width}
           height={height}
+        />
+        <PrintButton
+          handlePrint={handlePrint}
+          disabled={width === 0 || height === 0 || imgList.length === 0}
         />
       </div>
     </main>
@@ -48,6 +48,7 @@ const mainStyles = css`
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  padding: 50px;
 `
 
 const contentWrapperStyles = css`
@@ -58,4 +59,10 @@ const contentWrapperStyles = css`
   gap: 50px;
   padding: 0 50px;
   height: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
 `

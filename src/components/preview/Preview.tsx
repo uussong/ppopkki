@@ -79,12 +79,15 @@ const sectionStyles = css`
   grid-area: preview;
   width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP + 24}px;
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
+
+  @media screen and (max-width: 576px) {
+    width: ${A4.WIDTH * SCALE_FACTOR.MOBILE + 24}px;
+    height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE + 24};
+  }
 `
 
 const slideWrapperStyles = css`
   display: flex;
-  width: 100%;
-  height: 100%;
   background-color: #eee;
   overflow: hidden;
 
@@ -125,6 +128,12 @@ const listStyles = css`
   padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
   background-color: #fff;
 
+  @media screen and (max-width: 576px) {
+    width: ${A4.WIDTH * SCALE_FACTOR.MOBILE}px;
+    height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE}px;
+    padding: ${A4.PADDING * SCALE_FACTOR.MOBILE}px;
+  }
+
   @media print {
     width: ${A4.WIDTH}mm;
     height: ${A4.HEIGHT}mm;
@@ -135,6 +144,11 @@ const listItemStyles = (width: number, height: number) => css`
   width: ${width * SCALE_FACTOR.DESKTOP}px;
   height: ${height * SCALE_FACTOR.DESKTOP}px;
   box-shadow: inset 0 0 0 1px #eee;
+
+  @media screen and (max-width: 576px) {
+    width: ${width * SCALE_FACTOR.MOBILE}px;
+    height: ${height * SCALE_FACTOR.MOBILE}px;
+  }
 
   @media print {
     width: ${width}mm;
