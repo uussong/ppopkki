@@ -73,10 +73,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         )}
         <input type="submit" />
       </form>
-      <label
-        htmlFor="image"
-        css={labelStyles(width === undefined || height === undefined)}
-      >
+      <label htmlFor="image" css={labelStyles(!width || !height)}>
         사진 선택
       </label>
       <input
@@ -85,7 +82,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         accept="image/*"
         {...register('imgFile')}
         multiple
-        disabled={width === undefined || height === undefined}
+        disabled={!width || !height}
       />
     </section>
   )
