@@ -7,8 +7,8 @@ interface PrintButtonProps {
 
 function PrintButton({ handlePrint, disabled }: PrintButtonProps) {
   return (
-    <section css={styles}>
-      <button onClick={handlePrint} disabled={disabled}>
+    <section css={sectionStyles}>
+      <button onClick={handlePrint} disabled={disabled} css={buttonStyles}>
         뽑기
       </button>
     </section>
@@ -17,6 +17,20 @@ function PrintButton({ handlePrint, disabled }: PrintButtonProps) {
 
 export default PrintButton
 
-const styles = css`
+const sectionStyles = css`
   grid-area: print;
+  display: flex;
+  align-items: flex-end;
+`
+
+const buttonStyles = css`
+  width: 100%;
+  border: 2px solid #eee;
+  border-radius: 6px;
+  padding: 14px 0;
+  text-align: center;
+
+  :disabled {
+    color: #999;
+  }
 `

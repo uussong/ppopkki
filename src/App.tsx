@@ -56,8 +56,8 @@ const contentWrapperStyles = css`
   grid-template-areas:
     'input preview'
     'print preview';
-  gap: 50px;
-  padding: 0 50px;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
   height: 100%;
 
   @media screen and (max-width: 768px) {

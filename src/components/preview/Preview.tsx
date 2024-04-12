@@ -62,7 +62,10 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
         <ul css={buttonListStyles}>
           {imagePages.map((_, idx: number) => (
             <li key={idx}>
-              <button onClick={() => handlePageButtonClick(idx)}>
+              <button
+                onClick={() => handlePageButtonClick(idx)}
+                css={buttonStyles}
+              >
                 {idx + 1}
               </button>
             </li>
@@ -90,6 +93,7 @@ const slideWrapperStyles = css`
   display: flex;
   background-color: #eee;
   overflow: hidden;
+  border-radius: 16px;
 
   @media print {
     display: block;
@@ -166,6 +170,9 @@ const imageStyles = css`
 const buttonListStyles = css`
   display: flex;
   justify-content: flex-end;
-  gap: 6px;
   padding: 12px;
+`
+
+const buttonStyles = css`
+  padding: 12px 10px;
 `
