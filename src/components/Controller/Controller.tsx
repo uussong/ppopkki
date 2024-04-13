@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { css } from '@emotion/react'
 import { A4 } from '../../constants/paper'
@@ -26,9 +26,12 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   const height = watch('height')
   const imgFile = watch('imgFile')
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
     setHeight(height)
     setWidth(width)
+    setIsSubmitted(true)
   }
 
   useEffect(() => {
@@ -81,9 +84,11 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         {errors.height?.type === 'max' && (
           <p>최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다</p>
         )}
-        <input type="submit" value={'사용하기'} css={buttonStyles} />
+        <button type="submit" disabled={!width || !height} css={buttonStyles}>
+          크기 확인하기
+        </button>
       </form>
-      <label htmlFor="image" css={labelStyles(!width || !height)}>
+      <label htmlFor="image" css={labelStyles(!isSubmitted)}>
         사진 선택
       </label>
       <input
@@ -92,7 +97,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         accept="image/*"
         {...register('imgFile')}
         multiple
-        disabled={!width || !height}
+        disabled={!isSubmitted}
       />
     </section>
   )
@@ -127,6 +132,10 @@ const buttonStyles = css`
   border-radius: 6px;
   padding: 14px 0;
   text-align: center;
+
+  :disabled {
+    color: #999;
+  }
 `
 
 const labelStyles = (isDisabled: boolean) => css`
