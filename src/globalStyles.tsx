@@ -5,6 +5,7 @@ export const globalStyles = css`
   ${reset}
   * {
     box-sizing: inherit;
+    color: #222;
   }
 
   html {

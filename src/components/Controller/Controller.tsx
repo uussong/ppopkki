@@ -76,13 +76,21 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
             <span>mm</span>
           </div>
         </div>
-        {errors.width?.type === 'required' && <p>너비를 입력해주세요</p>}
-        {errors.width?.type === 'max' && (
-          <p>최대 너비는 {A4.WIDTH - A4.PADDING * 2}mm입니다</p>
+        {errors.width?.type === 'required' && (
+          <p css={errorMessageStyles}>너비를 입력해주세요</p>
         )}
-        {errors.height?.type === 'required' && <p>높이를 입력해주세요</p>}
+        {errors.width?.type === 'max' && (
+          <p css={errorMessageStyles}>
+            최대 너비는 {A4.WIDTH - A4.PADDING * 2}mm입니다
+          </p>
+        )}
+        {errors.height?.type === 'required' && (
+          <p css={errorMessageStyles}>높이를 입력해주세요</p>
+        )}
         {errors.height?.type === 'max' && (
-          <p>최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다</p>
+          <p css={errorMessageStyles}>
+            최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다
+          </p>
         )}
         <button type="submit" disabled={!width || !height} css={buttonStyles}>
           크기 확인하기
@@ -126,6 +134,10 @@ const inputStyles = css`
   padding: 14px 6px;
 `
 
+const errorMessageStyles = css`
+  margin: 10px 0;
+`
+
 const buttonStyles = css`
   width: 100%;
   border: 2px solid #eee;
@@ -142,7 +154,7 @@ const labelStyles = (isDisabled: boolean) => css`
   display: block;
   padding: 14px 0;
   text-align: center;
-  color: ${isDisabled ? '#999' : '#000'};
+  color: ${isDisabled && '#999'};
   border: 2px solid #eee;
   border-radius: 6px;
   cursor: ${isDisabled ? 'defalut' : 'pointer'};
