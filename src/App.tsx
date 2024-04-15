@@ -49,6 +49,10 @@ const mainStyles = css`
   width: 100%;
   min-height: 100vh;
   padding: 50px;
+
+  @media screen and (max-width: 576px) {
+    padding: 25px;
+  }
 `
 
 const contentWrapperStyles = css`
@@ -56,11 +60,11 @@ const contentWrapperStyles = css`
   grid-template-areas:
     'input preview'
     'print preview';
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
+  grid-template-columns: 2fr 3fr;
+  gap: 80px;
   height: 100%;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 992px) {
     display: flex;
     flex-direction: column;
     gap: 50px;

@@ -6,5 +6,5 @@ export const A4 = {
 
 export const SCALE_FACTOR = {
   MOBILE: 1.5,
-  DESKTOP: 2,
+  DESKTOP: 2.5,
 }

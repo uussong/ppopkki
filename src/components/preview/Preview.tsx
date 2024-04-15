@@ -84,8 +84,8 @@ const sectionStyles = css`
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
 
   @media screen and (max-width: 576px) {
-    width: ${A4.WIDTH * SCALE_FACTOR.MOBILE + 24}px;
-    height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE + 24};
+    max-width: ${A4.WIDTH * SCALE_FACTOR.MOBILE + 24}px;
+    max-height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE + 24}px;
   }
 `
 
