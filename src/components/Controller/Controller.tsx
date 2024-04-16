@@ -92,7 +92,11 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
             최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다
           </p>
         )}
-        <button type="submit" disabled={!width || !height} css={buttonStyles}>
+        <button
+          type="submit"
+          disabled={!width || !height || !!errors.width || !!errors.height}
+          css={buttonStyles}
+        >
           크기 확인하기
         </button>
       </form>
