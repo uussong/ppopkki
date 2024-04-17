@@ -55,7 +55,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
               placeholder="너비"
               {...register('width', {
                 required: true,
-                min: 1,
+                min: 10,
                 max: A4.WIDTH - A4.PADDING * 2,
               })}
               css={inputStyles}
@@ -68,7 +68,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
               placeholder="높이"
               {...register('height', {
                 required: true,
-                min: 1,
+                min: 10,
                 max: A4.HEIGHT - A4.PADDING * 2,
               })}
               css={inputStyles}
@@ -79,17 +79,17 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         {errors.width?.type === 'required' && (
           <p css={errorMessageStyles}>너비를 입력해주세요</p>
         )}
-        {errors.width?.type === 'max' && (
+        {(errors.width?.type === 'max' || errors.width?.type === 'min') && (
           <p css={errorMessageStyles}>
-            최대 너비는 {A4.WIDTH - A4.PADDING * 2}mm입니다
+            10~{A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요
           </p>
         )}
         {errors.height?.type === 'required' && (
           <p css={errorMessageStyles}>높이를 입력해주세요</p>
         )}
-        {errors.height?.type === 'max' && (
+        {(errors.height?.type === 'max' || errors.height?.type === 'min') && (
           <p css={errorMessageStyles}>
-            최대 높이는 {A4.HEIGHT - A4.PADDING * 2}mm입니다
+            10~{A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요
           </p>
         )}
         <button
