@@ -50,8 +50,10 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div css={inputGroupStyles}>
           <div>
+            <label htmlFor="width">너비</label>
             <input
               type="number"
+              id="width"
               placeholder="너비"
               {...register('width', {
                 required: true,
@@ -63,8 +65,10 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
             <span>mm</span>
           </div>
           <div>
+            <label htmlFor="height">높이</label>
             <input
               type="number"
+              id="height"
               placeholder="높이"
               {...register('height', {
                 required: true,
@@ -126,6 +130,7 @@ const sectionStyles = css`
 
 const inputGroupStyles = css`
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 10px;
 `
@@ -134,7 +139,7 @@ const inputStyles = css`
   width: 40px;
   border: 1px solid #eee;
   border-radius: 6px;
-  margin-right: 5px;
+  margin: 0 5px;
   padding: 14px 6px;
 `
 
