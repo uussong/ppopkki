@@ -96,11 +96,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
             10~{A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요
           </p>
         )}
-        <button
-          type="submit"
-          disabled={!width || !height || !!errors.width || !!errors.height}
-          css={buttonStyles}
-        >
+        <button type="submit" disabled={!width || !height} css={buttonStyles}>
           크기 확인하기
         </button>
       </form>
@@ -113,7 +109,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         accept="image/*"
         {...register('imgFile')}
         multiple
-        disabled={!isSubmitted}
+        disabled={!isSubmitted || !!errors.width || !!errors.height}
       />
     </section>
   )
