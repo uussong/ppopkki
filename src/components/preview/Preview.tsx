@@ -80,10 +80,10 @@ export default Preview
 
 const sectionStyles = css`
   grid-area: preview;
-  width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP + 24}px;
-  height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
+  max-width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP + 24}px;
+  max-height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 768px) {
     max-width: ${A4.WIDTH * SCALE_FACTOR.MOBILE + 24}px;
     max-height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE + 24}px;
   }
@@ -132,7 +132,7 @@ const listStyles = css`
   padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
   background-color: #fff;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 768px) {
     width: ${A4.WIDTH * SCALE_FACTOR.MOBILE}px;
     height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE}px;
     padding: ${A4.PADDING * SCALE_FACTOR.MOBILE}px;
@@ -149,7 +149,7 @@ const listItemStyles = (width: number, height: number) => css`
   height: ${height * SCALE_FACTOR.DESKTOP}px;
   box-shadow: inset 0 0 0 1px #eee;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 768px) {
     width: ${width * SCALE_FACTOR.MOBILE}px;
     height: ${height * SCALE_FACTOR.MOBILE}px;
   }

@@ -64,7 +64,7 @@ const contentWrapperStyles = css`
   gap: 80px;
   height: 100%;
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     gap: 50px;
