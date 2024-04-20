@@ -10,8 +10,8 @@ interface ControllerProps {
 }
 
 interface FormInput {
-  width: number
-  height: number
+  width: string
+  height: string
   imgFile: FileList
 }
 
@@ -29,8 +29,8 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
-    setHeight(height)
-    setWidth(width)
+    setHeight(parseInt(height))
+    setWidth(parseInt(width))
     setIsSubmitted(true)
   }
 
