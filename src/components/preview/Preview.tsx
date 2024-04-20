@@ -1,4 +1,4 @@
-import { MutableRefObject, useState } from 'react'
+import { MutableRefObject, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { A4, SCALE_FACTOR } from '../../constants/paper'
 
@@ -11,16 +11,21 @@ interface PreviewProps {
 
 function Preview({ printRef, imgList, width, height }: PreviewProps) {
   const [activePage, setActivePage] = useState(0)
-  const MAX_IMAGES_PER_PAGE =
-    width && height
-      ? Math.floor((A4.WIDTH - A4.PADDING * 2) / width) *
-        Math.floor((A4.HEIGHT - A4.PADDING * 2) / height)
-      : 0
-  const array = Array.from({ length: MAX_IMAGES_PER_PAGE })
+  const [maxImagesPerPage, setMaxImagesPerPage] = useState(0)
 
+  useEffect(() => {
+    if (width && height) {
+      const calculatedMaxImagesPerPage =
+        Math.floor((A4.WIDTH - A4.PADDING * 2) / (width + 2.5)) *
+        Math.floor((A4.HEIGHT - A4.PADDING * 2) / (height + 2.5))
+      setMaxImagesPerPage(calculatedMaxImagesPerPage)
+    }
+  }, [width, height])
+
+  const array = Array.from({ length: maxImagesPerPage })
   const imagePages = []
-  for (let i = 0; i < imgList.length; i += MAX_IMAGES_PER_PAGE) {
-    imagePages.push(imgList.slice(i, i + MAX_IMAGES_PER_PAGE))
+  for (let i = 0; i < imgList.length; i += maxImagesPerPage) {
+    imagePages.push(imgList.slice(i, i + maxImagesPerPage))
   }
 
   const handlePageButtonClick = (idx: number) => {
