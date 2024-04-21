@@ -21,7 +21,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<FormInput>()
+  } = useForm<FormInput>({ mode: 'onBlur' })
   const width = watch('width')
   const height = watch('height')
   const imgFile = watch('imgFile')
