@@ -56,9 +56,15 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
               id="width"
               placeholder="너비"
               {...register('width', {
-                required: true,
-                min: 10,
-                max: A4.WIDTH - A4.PADDING * 2,
+                required: '너비를 입력해주세요',
+                min: {
+                  value: 10,
+                  message: `10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                },
+                max: {
+                  value: A4.WIDTH - A4.PADDING * 2,
+                  message: `10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                },
               })}
               css={inputStyles}
             />
@@ -71,30 +77,24 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
               id="height"
               placeholder="높이"
               {...register('height', {
-                required: true,
-                min: 10,
-                max: A4.HEIGHT - A4.PADDING * 2,
+                required: '높이를 입력해주세요',
+                min: {
+                  value: 10,
+                  message: `10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                },
+                max: {
+                  value: A4.HEIGHT - A4.PADDING * 2,
+                  message: `10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                },
               })}
               css={inputStyles}
             />
             <span>mm</span>
           </div>
         </div>
-        {errors.width?.type === 'required' && (
-          <p css={errorMessageStyles}>너비를 입력해주세요</p>
-        )}
-        {(errors.width?.type === 'max' || errors.width?.type === 'min') && (
-          <p css={errorMessageStyles}>
-            10~{A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요
-          </p>
-        )}
-        {errors.height?.type === 'required' && (
-          <p css={errorMessageStyles}>높이를 입력해주세요</p>
-        )}
-        {(errors.height?.type === 'max' || errors.height?.type === 'min') && (
-          <p css={errorMessageStyles}>
-            10~{A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요
-          </p>
+        {errors.width && <p css={errorMessageStyles}>{errors.width.message}</p>}
+        {errors.height && (
+          <p css={errorMessageStyles}>{errors.height.message}</p>
         )}
         <button type="submit" disabled={!width || !height} css={buttonStyles}>
           크기 확인하기
