@@ -39,27 +39,23 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
           <>
             {imagePages.map((imagePage, idx) => (
               <div key={idx} css={slideStyles(activePage)}>
-                <div css={wrapperStyles}>
-                  <ul css={listStyles}>
-                    {imagePage.map((img, idx) => (
-                      <li key={idx} css={listItemStyles(width, height)}>
-                        <img src={img} css={imageStyles} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul css={listStyles}>
+                  {imagePage.map((img, idx) => (
+                    <li key={idx} css={listItemStyles(width, height)}>
+                      <img src={img} css={imageStyles} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </>
         ) : (
           <>
-            <div css={wrapperStyles}>
-              <ul css={listStyles}>
-                {array.map((_, index) => (
-                  <li key={index} css={listItemStyles(width, height)}></li>
-                ))}
-              </ul>
-            </div>
+            <ul css={listStyles}>
+              {array.map((_, index) => (
+                <li key={index} css={listItemStyles(width, height)}></li>
+              ))}
+            </ul>
           </>
         )}
       </div>
@@ -85,26 +81,23 @@ export default Preview
 
 const sectionStyles = css`
   grid-area: preview;
-  max-width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP + 24}px;
-  max-height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP + 24}px;
+  max-width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP}px;
+  min-height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP}px;
 
   @media screen and (max-width: 768px) {
-    max-width: ${A4.WIDTH * SCALE_FACTOR.MOBILE + 24}px;
-    max-height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE + 24}px;
+    max-width: ${A4.WIDTH * SCALE_FACTOR.MOBILE}px;
+    min-height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE}px;
   }
 `
 
 const slideWrapperStyles = css`
   display: flex;
-  background-color: #eee;
   overflow: hidden;
-  border-radius: 16px;
 
   @media print {
     display: block;
     width: ${A4.WIDTH}mm;
     height: ${A4.HEIGHT}mm;
-    background-color: transparent;
     overflow: visible;
   }
 `
@@ -113,18 +106,6 @@ const slideStyles = (idx: number) => css`
   width: 100%;
   height: 100%;
   transform: translateX(-${idx * 100}%);
-`
-
-const wrapperStyles = css`
-  width: 100%;
-  height: 100%;
-  padding: 12px;
-  background-color: #eee;
-
-  @media print {
-    background-color: transparent;
-    transform: none;
-  }
 `
 
 const listStyles = css`
@@ -136,6 +117,7 @@ const listStyles = css`
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP}px;
   padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
   background-color: #fff;
+  box-shadow: inset 0 0 0 2px #eee;
 
   @media screen and (max-width: 768px) {
     width: ${A4.WIDTH * SCALE_FACTOR.MOBILE}px;
@@ -146,6 +128,7 @@ const listStyles = css`
   @media print {
     width: ${A4.WIDTH}mm;
     height: ${A4.HEIGHT}mm;
+    box-shadow: none;
   }
 `
 
@@ -175,9 +158,9 @@ const imageStyles = css`
 const buttonListStyles = css`
   display: flex;
   justify-content: flex-end;
-  padding: 12px;
+  font-size: 14px;
 `
 
 const buttonStyles = css`
-  padding: 12px 10px;
+  padding: 12px 8px;
 `

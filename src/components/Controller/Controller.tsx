@@ -128,7 +128,7 @@ const inputGroupStyles = css`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `
 
 const inputStyles = css`
@@ -140,7 +140,8 @@ const inputStyles = css`
 `
 
 const errorMessageStyles = css`
-  margin: 10px 0;
+  margin: 12px 0;
+  font-size: 14px;
 `
 
 const buttonStyles = css`
