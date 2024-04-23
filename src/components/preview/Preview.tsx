@@ -15,10 +15,24 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
 
   useEffect(() => {
     if (width && height) {
-      const calculatedMaxImagesPerPage =
-        Math.floor((A4.WIDTH - A4.PADDING * 2) / (width + 2.5)) *
-        Math.floor((A4.HEIGHT - A4.PADDING * 2) / (height + 2.5))
-      setMaxImagesPerPage(calculatedMaxImagesPerPage)
+      const availableWidth = A4.WIDTH - A4.PADDING * 2
+      const availableHeight = A4.HEIGHT - A4.PADDING * 2
+      const columnCountRemainder = availableWidth % (width + 5)
+      const rowCountRemainder = availableHeight % (height + 5)
+
+      const columnCount =
+        columnCountRemainder >= width
+          ? Math.floor(availableWidth / (width + 5)) +
+            Math.floor(columnCountRemainder / width)
+          : Math.floor(availableWidth / (width + 5))
+      const rowCount =
+        rowCountRemainder >= height
+          ? Math.floor(availableHeight / (height + 5)) +
+            Math.floor(rowCountRemainder / height)
+          : Math.floor(availableHeight / (height + 5))
+
+      const maxImagesPerPage = columnCount * rowCount
+      setMaxImagesPerPage(maxImagesPerPage)
     }
   }, [width, height])
 
@@ -112,7 +126,7 @@ const listStyles = css`
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  gap: 5px;
+  gap: ${5 * SCALE_FACTOR.DESKTOP}px;
   width: ${A4.WIDTH * SCALE_FACTOR.DESKTOP}px;
   height: ${A4.HEIGHT * SCALE_FACTOR.DESKTOP}px;
   padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
@@ -120,6 +134,7 @@ const listStyles = css`
   box-shadow: inset 0 0 0 2px #eee;
 
   @media screen and (max-width: 768px) {
+    gap: ${5 * SCALE_FACTOR.MOBILE}px;
     width: ${A4.WIDTH * SCALE_FACTOR.MOBILE}px;
     height: ${A4.HEIGHT * SCALE_FACTOR.MOBILE}px;
     padding: ${A4.PADDING * SCALE_FACTOR.MOBILE}px;
