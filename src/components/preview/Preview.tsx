@@ -120,6 +120,10 @@ const slideStyles = (idx: number) => css`
   width: 100%;
   height: 100%;
   transform: translateX(-${idx * 100}%);
+
+  @media print {
+    transform: none;
+  }
 `
 
 const listStyles = css`
