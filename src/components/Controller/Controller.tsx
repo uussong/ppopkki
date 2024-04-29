@@ -96,11 +96,18 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
         {errors.height && (
           <p css={errorMessageStyles}>{errors.height.message}</p>
         )}
-        <button type="submit" disabled={!width || !height} css={buttonStyles}>
+        <button
+          type="submit"
+          disabled={!width || !height || !!errors.height || !!errors.width}
+          css={buttonStyles}
+        >
           크기 확인하기
         </button>
       </form>
-      <label htmlFor="image" css={labelStyles(!isSubmitted)}>
+      <label
+        htmlFor="image"
+        css={labelStyles(!isSubmitted || !!errors.width || !!errors.height)}
+      >
         사진 선택
       </label>
       <input
