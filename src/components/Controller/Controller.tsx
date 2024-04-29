@@ -59,11 +59,11 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
                 required: '너비를 입력해주세요',
                 min: {
                   value: 10,
-                  message: `10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                  message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
                 },
                 max: {
                   value: A4.WIDTH - A4.PADDING * 2,
-                  message: `10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                  message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
                 },
               })}
               css={inputStyles}
@@ -80,11 +80,11 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
                 required: '높이를 입력해주세요',
                 min: {
                   value: 10,
-                  message: `10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                  message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
                 },
                 max: {
                   value: A4.HEIGHT - A4.PADDING * 2,
-                  message: `10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                  message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
                 },
               })}
               css={inputStyles}
