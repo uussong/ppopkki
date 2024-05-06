@@ -1,15 +1,23 @@
-import { MutableRefObject, useEffect, useState } from 'react'
+import { MutableRefObject, useCallback, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { A4, SCALE_FACTOR } from '../../constants/paper'
+import { useDropzone } from 'react-dropzone'
 
 interface PreviewProps {
   printRef: MutableRefObject<null>
   imgList: string[]
   width: number
   height: number
+  setImgList: (imgList: string[]) => void
 }
 
-function Preview({ printRef, imgList, width, height }: PreviewProps) {
+function Preview({
+  printRef,
+  imgList,
+  width,
+  height,
+  setImgList,
+}: PreviewProps) {
   const [activePage, setActivePage] = useState(0)
   const [maxImagesPerPage, setMaxImagesPerPage] = useState(0)
 
@@ -46,33 +54,56 @@ function Preview({ printRef, imgList, width, height }: PreviewProps) {
     setActivePage(idx)
   }
 
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const urlList: string[] = []
+      for (const file of acceptedFiles) {
+        const url = URL.createObjectURL(file)
+        urlList.push(url)
+      }
+      setImgList(urlList)
+    },
+    [setImgList],
+  )
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: { 'image/*': [] },
+  })
+
   return (
     <section css={sectionStyles}>
       <div ref={printRef} css={slideWrapperStyles}>
         {imgList.length > 0 ? (
-          <>
+          <div {...getRootProps()}>
             {imagePages.map((imagePage, idx) => (
               <div key={idx} css={slideStyles(activePage)}>
                 <ul css={listStyles}>
                   {imagePage.map((img, idx) => (
                     <li key={idx} css={listItemStyles(width, height)}>
                       <img src={img} css={imageStyles} />
+                      <input {...getInputProps()} />
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-          </>
-        ) : (
-          <>
+          </div>
+        ) : width && height > 0 ? (
+          <div {...getRootProps()}>
             <ul css={listStyles}>
               {array.map((_, index) => (
                 <li key={index} css={listItemStyles(width, height)}></li>
               ))}
+              <input {...getInputProps()} />
             </ul>
+          </div>
+        ) : (
+          <>
+            <ul css={listStyles}></ul>
           </>
         )}
       </div>
+
       {imagePages.length > 1 && (
         <ul css={buttonListStyles}>
           {imagePages.map((_, idx: number) => (

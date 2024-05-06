@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { css } from '@emotion/react'
 import { A4 } from '../../constants/paper'
@@ -26,12 +26,9 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   const height = watch('height')
   const imgFile = watch('imgFile')
 
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
   const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
     setHeight(parseInt(height))
     setWidth(parseInt(width))
-    setIsSubmitted(true)
   }
 
   useEffect(() => {
@@ -43,7 +40,7 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
       }
       setImgList(urlList)
     }
-  }, [imgFile])
+  }, [imgFile, setImgList])
 
   return (
     <section css={sectionStyles}>
@@ -104,20 +101,6 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
           크기 확인하기
         </button>
       </form>
-      <label
-        htmlFor="image"
-        css={labelStyles(!isSubmitted || !!errors.width || !!errors.height)}
-      >
-        사진 선택
-      </label>
-      <input
-        type="file"
-        id="image"
-        accept="image/*"
-        {...register('imgFile')}
-        multiple
-        disabled={!isSubmitted || !!errors.width || !!errors.height}
-      />
     </section>
   )
 }

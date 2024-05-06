@@ -30,6 +30,9 @@ function App() {
           imgList={imgList}
           width={width}
           height={height}
+          setImgList={(imgList) => {
+            setImgList((prevData) => [...prevData, ...imgList])
+          }}
         />
         <PrintButton
           handlePrint={handlePrint}
