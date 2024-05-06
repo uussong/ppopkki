@@ -6,6 +6,7 @@ export const globalStyles = css`
   * {
     box-sizing: inherit;
     color: #222;
+    font-family: 'Pretendard', sans-serif;
   }
 
   html {
