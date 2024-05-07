@@ -45,54 +45,57 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   return (
     <section css={sectionStyles}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div css={inputGroupStyles}>
-          <div>
-            <label htmlFor="width">너비</label>
-            <input
-              type="number"
-              id="width"
-              placeholder="너비"
-              {...register('width', {
-                required: '너비를 입력해주세요',
-                min: {
-                  value: 10,
-                  message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
-                },
-                max: {
-                  value: A4.WIDTH - A4.PADDING * 2,
-                  message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
-                },
-              })}
-              css={inputStyles}
-            />
-            <span>mm</span>
+        <div>
+          <div css={inputGroupStyles}>
+            <div>
+              <label htmlFor="width">너비</label>
+              <input
+                type="number"
+                id="width"
+                placeholder={`10~${A4.WIDTH - A4.PADDING * 2}(mm)`}
+                {...register('width', {
+                  required: '너비를 입력해주세요',
+                  min: {
+                    value: 10,
+                    message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                  },
+                  max: {
+                    value: A4.WIDTH - A4.PADDING * 2,
+                    message: `너비는 10~${A4.WIDTH - A4.PADDING * 2}의 크기만 가능해요`,
+                  },
+                })}
+                css={inputStyles}
+              />
+            </div>
+            <span>&times;</span>
+            <div>
+              <label htmlFor="height">높이</label>
+              <input
+                type="number"
+                id="height"
+                placeholder={`10~${A4.HEIGHT - A4.PADDING * 2}(mm)`}
+                {...register('height', {
+                  required: '높이를 입력해주세요',
+                  min: {
+                    value: 10,
+                    message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                  },
+                  max: {
+                    value: A4.HEIGHT - A4.PADDING * 2,
+                    message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
+                  },
+                })}
+                css={inputStyles}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="height">높이</label>
-            <input
-              type="number"
-              id="height"
-              placeholder="높이"
-              {...register('height', {
-                required: '높이를 입력해주세요',
-                min: {
-                  value: 10,
-                  message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
-                },
-                max: {
-                  value: A4.HEIGHT - A4.PADDING * 2,
-                  message: `높이는 10~${A4.HEIGHT - A4.PADDING * 2}의 크기만 가능해요`,
-                },
-              })}
-              css={inputStyles}
-            />
-            <span>mm</span>
-          </div>
+          {errors.width && (
+            <p css={errorMessageStyles}>{errors.width.message}</p>
+          )}
+          {errors.height && (
+            <p css={errorMessageStyles}>{errors.height.message}</p>
+          )}
         </div>
-        {errors.width && <p css={errorMessageStyles}>{errors.width.message}</p>}
-        {errors.height && (
-          <p css={errorMessageStyles}>{errors.height.message}</p>
-        )}
         <button
           type="submit"
           disabled={!width || !height || !!errors.height || !!errors.width}
@@ -109,29 +112,37 @@ export default Controller
 
 const sectionStyles = css`
   grid-area: input;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  min-width: 285px;
 `
 
 const inputGroupStyles = css`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 12px;
 `
 
 const inputStyles = css`
-  width: 40px;
+  width: 80px;
   border: 1px solid #eee;
   border-radius: 6px;
-  margin: 0 5px;
+  margin: 0 0 0 5px;
   padding: 14px 6px;
+
+  ::placeholder {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  :focus {
+    border-color: #999;
+  }
 `
 
 const errorMessageStyles = css`
-  margin: 12px 0;
   font-size: 14px;
+  color: #999;
+  margin: 12px 0 0 0;
 `
 
 const buttonStyles = css`
@@ -140,18 +151,13 @@ const buttonStyles = css`
   border-radius: 6px;
   padding: 14px 0;
   text-align: center;
+  margin: 25px 0 0 0;
 
   :disabled {
     color: #999;
   }
-`
 
-const labelStyles = (isDisabled: boolean) => css`
-  display: block;
-  padding: 14px 0;
-  text-align: center;
-  color: ${isDisabled && '#999'};
-  border: 2px solid #eee;
-  border-radius: 6px;
-  cursor: ${isDisabled ? 'defalut' : 'pointer'};
+  :hover {
+    background-color: #eee;
+  }
 `

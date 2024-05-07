@@ -51,9 +51,9 @@ const mainStyles = css`
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding: 50px;
+  padding: 30px;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 992px) {
     padding: 25px;
   }
 `
@@ -66,6 +66,10 @@ const contentWrapperStyles = css`
   grid-template-columns: 2fr 3fr;
   gap: 80px;
   height: 100%;
+
+  @media screen and (max-width: 992px) {
+    gap: 40px;
+  }
 
   @media screen and (max-width: 768px) {
     display: flex;
