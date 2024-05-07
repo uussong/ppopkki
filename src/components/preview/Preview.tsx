@@ -72,9 +72,9 @@ function Preview({
 
   return (
     <section css={sectionStyles}>
-      <div ref={printRef} css={slideWrapperStyles}>
+      <div ref={printRef}>
         {imgList.length > 0 ? (
-          <div {...getRootProps()}>
+          <div css={slideWrapperStyles} {...getRootProps()}>
             {imagePages.map((imagePage, idx) => (
               <div key={idx} css={slideStyles(activePage)}>
                 <ul css={listStyles}>
@@ -84,6 +84,9 @@ function Preview({
                       <input {...getInputProps()} />
                     </li>
                   ))}
+                  <p css={directionStyles}>
+                    출력할 이미지를 여기에 끌어놓거나 클릭해 선택하세요
+                  </p>
                 </ul>
               </div>
             ))}
@@ -95,11 +98,18 @@ function Preview({
                 <li key={index} css={listItemStyles(width, height)}></li>
               ))}
               <input {...getInputProps()} />
+              <p css={directionStyles}>
+                출력할 이미지를 여기에 끌어놓거나 클릭해 선택하세요
+              </p>
             </ul>
           </div>
         ) : (
           <>
-            <ul css={listStyles}></ul>
+            <div css={listStyles}>
+              <p css={directionStyles}>
+                출력할 이미지를 여기에 끌어놓거나 클릭해 선택하세요
+              </p>
+            </div>
           </>
         )}
       </div>
@@ -158,6 +168,7 @@ const slideStyles = (idx: number) => css`
 `
 
 const listStyles = css`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -167,6 +178,7 @@ const listStyles = css`
   padding: ${A4.PADDING * SCALE_FACTOR.DESKTOP}px;
   background-color: #fff;
   box-shadow: inset 0 0 0 2px #eee;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     gap: ${5 * SCALE_FACTOR.MOBILE}px;
@@ -185,7 +197,8 @@ const listStyles = css`
 const listItemStyles = (width: number, height: number) => css`
   width: ${width * SCALE_FACTOR.DESKTOP}px;
   height: ${height * SCALE_FACTOR.DESKTOP}px;
-  box-shadow: inset 0 0 0 1px #eee;
+  box-shadow: inset 0 0 0 1px #d3d3d3;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     width: ${width * SCALE_FACTOR.MOBILE}px;
@@ -203,6 +216,18 @@ const imageStyles = css`
   width: 100%;
   height: 100%;
   object-fit: contain;
+`
+
+const directionStyles = css`
+  position: absolute;
+  font-size: 14px;
+  bottom: 4px;
+  color: #999;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+    bottom: 2px;
+  }
 `
 
 const buttonListStyles = css`
