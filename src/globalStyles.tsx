@@ -25,6 +25,10 @@ export const globalStyles = css`
     :disabled {
       cursor: initial;
     }
+
+    :hover:not(:disabled) {
+      background-color: #eee;
+    }
   }
 
   input[type='file'] {

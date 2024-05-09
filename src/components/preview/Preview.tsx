@@ -2,6 +2,7 @@ import { MutableRefObject, useCallback, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { A4, SCALE_FACTOR } from '../../constants/paper'
 import { useDropzone } from 'react-dropzone'
+import Pagination from './Pagination'
 
 interface PreviewProps {
   printRef: MutableRefObject<null>
@@ -45,13 +46,9 @@ function Preview({
   }, [width, height])
 
   const array = Array.from({ length: maxImagesPerPage })
-  const imagePages = []
+  const imagePages: string[][] = []
   for (let i = 0; i < imgList.length; i += maxImagesPerPage) {
     imagePages.push(imgList.slice(i, i + maxImagesPerPage))
-  }
-
-  const handlePageButtonClick = (idx: number) => {
-    setActivePage(idx)
   }
 
   const onDrop = useCallback(
@@ -115,18 +112,10 @@ function Preview({
       </div>
 
       {imagePages.length > 1 && (
-        <ul css={buttonListStyles}>
-          {imagePages.map((_, idx: number) => (
-            <li key={idx}>
-              <button
-                onClick={() => handlePageButtonClick(idx)}
-                css={buttonStyles}
-              >
-                {idx + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Pagination
+          imagePages={imagePages}
+          setActivePage={(idx) => setActivePage(idx)}
+        />
       )}
     </section>
   )
@@ -228,14 +217,8 @@ const directionStyles = css`
     font-size: 12px;
     bottom: 2px;
   }
-`
 
-const buttonListStyles = css`
-  display: flex;
-  justify-content: flex-end;
-  font-size: 14px;
-`
-
-const buttonStyles = css`
-  padding: 12px 8px;
+  @media print {
+    display: none;
+  }
 `

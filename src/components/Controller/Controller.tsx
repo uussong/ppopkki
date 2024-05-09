@@ -156,8 +156,4 @@ const buttonStyles = css`
   :disabled {
     color: #999;
   }
-
-  :hover {
-    background-color: #eee;
-  }
 `
