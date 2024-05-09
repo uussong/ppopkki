@@ -54,7 +54,7 @@ function Pagination({ imagePages, setActivePage }: PaginationProps) {
         disabled={pageIndex === 1}
         css={buttonStyles}
       >
-        &lt;
+        이전
       </button>
       <input
         type="number"
@@ -71,7 +71,7 @@ function Pagination({ imagePages, setActivePage }: PaginationProps) {
         disabled={pageIndex === imagePages.length}
         css={buttonStyles}
       >
-        &gt;
+        다음
       </button>
     </div>
   )
@@ -97,4 +97,8 @@ const inputStyles = css`
 const buttonStyles = css`
   padding: 10px;
   border-radius: 6px;
+
+  :disabled {
+    color: #999;
+  }
 `
