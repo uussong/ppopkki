@@ -65,7 +65,7 @@ function Pagination({ imagePages, setActivePage }: PaginationProps) {
         css={inputStyles}
       />
       <span>&#47;</span>
-      <span>{imagePages.length}</span>
+      <span css={spanStyles}>{imagePages.length}</span>
       <button
         onClick={handleNextClick}
         disabled={pageIndex === imagePages.length}
@@ -89,9 +89,19 @@ const paginationStyles = css`
 `
 
 const inputStyles = css`
-  max-width: 10px;
+  max-width: 16px;
   font-size: 14px;
   text-align: center;
+  padding: 2px 1px;
+
+  :focus {
+    box-shadow: inset 0 -1px 0 0 #999;
+  }
+`
+
+const spanStyles = css`
+  max-width: 16px;
+  padding: 2px 1px;
 `
 
 const buttonStyles = css`
