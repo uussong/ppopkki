@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { css } from '@emotion/react'
 import { A4 } from '../../constants/paper'
+import { calculateMaxImagesPerPage } from '../../utils/utils'
 
 interface ControllerProps {
   setWidth: (width: number) => void
@@ -16,6 +17,7 @@ interface FormInput {
 }
 
 function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
+  const [imageCount, setImageCount] = useState<number | null>(null)
   const {
     register,
     formState: { errors },
@@ -25,11 +27,6 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   const width = watch('width')
   const height = watch('height')
   const imgFile = watch('imgFile')
-
-  const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
-    setHeight(parseInt(height))
-    setWidth(parseInt(width))
-  }
 
   useEffect(() => {
     if (imgFile && imgFile.length > 0) {
@@ -41,6 +38,21 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
       setImgList(urlList)
     }
   }, [imgFile, setImgList])
+
+  const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
+    const parsedWidth = parseInt(width)
+    const parsedHeight = parseInt(height)
+    setWidth(parsedWidth)
+    setHeight(parsedHeight)
+    getImageCount(parsedWidth, parsedHeight)
+  }
+
+  const getImageCount = (width: number, height: number) => {
+    if (width && height) {
+      const imageCount = calculateMaxImagesPerPage(width, height)
+      setImageCount(imageCount)
+    }
+  }
 
   return (
     <section css={sectionStyles}>
@@ -104,6 +116,11 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
           크기 확인하기
         </button>
       </form>
+      {imageCount && (
+        <p css={infoMessageStyles}>
+          A4 용지 한 장에 이미지 {imageCount}개가 출력 가능해요
+        </p>
+      )}
     </section>
   )
 }
@@ -156,4 +173,8 @@ const buttonStyles = css`
   :disabled {
     color: #999;
   }
+`
+
+const infoMessageStyles = css`
+  margin: 12px 0 0 0;
 `
