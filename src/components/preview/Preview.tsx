@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 import { A4, SCALE_FACTOR } from '../../constants/paper'
 import { useDropzone } from 'react-dropzone'
 import Pagination from './Pagination'
+import { calculateMaxImagesPerPage } from '../../utils/utils'
 
 interface PreviewProps {
   printRef: MutableRefObject<null>
@@ -24,23 +25,7 @@ function Preview({
 
   useEffect(() => {
     if (width && height) {
-      const availableWidth = A4.WIDTH - A4.PADDING * 2
-      const availableHeight = A4.HEIGHT - A4.PADDING * 2
-      const columnCountRemainder = availableWidth % (width + 5)
-      const rowCountRemainder = availableHeight % (height + 5)
-
-      const columnCount =
-        columnCountRemainder >= width
-          ? Math.floor(availableWidth / (width + 5)) +
-            Math.floor(columnCountRemainder / width)
-          : Math.floor(availableWidth / (width + 5))
-      const rowCount =
-        rowCountRemainder >= height
-          ? Math.floor(availableHeight / (height + 5)) +
-            Math.floor(rowCountRemainder / height)
-          : Math.floor(availableHeight / (height + 5))
-
-      const maxImagesPerPage = columnCount * rowCount
+      const maxImagesPerPage = calculateMaxImagesPerPage(width, height)
       setMaxImagesPerPage(maxImagesPerPage)
     }
   }, [width, height])
