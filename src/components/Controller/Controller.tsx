@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { css } from '@emotion/react'
 import { A4 } from '../../constants/paper'
@@ -16,7 +16,7 @@ interface FormInput {
   imgFile: FileList
 }
 
-function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
+function Controller({ setWidth, setHeight }: ControllerProps) {
   const [imageCount, setImageCount] = useState<number | null>(null)
   const {
     register,
@@ -26,18 +26,6 @@ function Controller({ setWidth, setHeight, setImgList }: ControllerProps) {
   } = useForm<FormInput>({ mode: 'onBlur' })
   const width = watch('width')
   const height = watch('height')
-  const imgFile = watch('imgFile')
-
-  useEffect(() => {
-    if (imgFile && imgFile.length > 0) {
-      const urlList: string[] = []
-      for (const file of imgFile) {
-        const url = URL.createObjectURL(file)
-        urlList.push(url)
-      }
-      setImgList(urlList)
-    }
-  }, [imgFile, setImgList])
 
   const onSubmit: SubmitHandler<FormInput> = ({ width, height }) => {
     const parsedWidth = parseInt(width)
