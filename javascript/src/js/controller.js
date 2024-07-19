@@ -16,4 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .setAttribute('placeholder', `10~${maxHeight} (mm)`)
   document.getElementById('height').setAttribute('min', minValue)
   document.getElementById('height').setAttribute('max', maxHeight)
+
+  const form = document.getElementById('form')
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+  })
 })
