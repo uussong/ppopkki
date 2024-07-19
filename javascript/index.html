@@ -13,8 +13,47 @@
 </head>
 
 <body>
+  <main id="app">
+    <div id="content-wrapper">
+      <!-- Controller Section -->
+      <section id="controller">
+        <form id="form">
+          <div>
+            <div id="input-group">
+              <div>
+                <label for="width">너비</label>
+                <input type="number" id="width" placeholder="10~... (mm)" />
+              </div>
+              <span>&times;</span>
+              <div>
+                <label for="height">높이</label>
+                <input type="number" id="height" placeholder="10~... (mm)" />
+              </div>
+            </div>
+            <p id="error-message" style="color: red;"></p>
+            <button type="submit" id="submit-button">크기 확인하기</button>
+          </div>
+        </form>
+        <p id="info-message"></p>
+      </section>
 
-  <script src=""></script>
+      <!-- Preview Section -->
+      <section id="preview">
+        <div id="print-ref">
+          <div id="image-container">
+          </div>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*" />
+        <label id="direction" for="file-input">출력할 이미지를 선택하세요</label>
+        <div id="pagination"></div>
+      </section>
+
+      <!-- Print Button -->
+      <button id="print-button" disabled>Print</button>
+    </div>
+  </main>
+
+  <script src="./src/app.js"></script>
 </body>
 
 </html>
