@@ -1,3 +1,5 @@
+import { A4 } from '../constants/paper.js'
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form')
   const widthInput = document.getElementById('width')
@@ -18,7 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = parseInt(widthInput.value, 10)
     const height = parseInt(heightInput.value, 10)
 
-    if (isNaN(width) || isNaN(height) || width < 10 || height < 10) {
+    if (
+      isNaN(width) ||
+      isNaN(height) ||
+      width < 10 ||
+      height < 10 ||
+      width > A4.WIDTH - 2 * A4.PADDING ||
+      height > A4.HEIGHT - 2 * A4.PADDING
+    ) {
       return
     }
 
@@ -50,7 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = parseInt(widthInput.value, 10)
     const height = parseInt(heightInput.value, 10)
 
-    if (!isNaN(width) && !isNaN(height) && width >= 10 && height >= 10) {
+    if (
+      !isNaN(width) &&
+      !isNaN(height) &&
+      width >= 10 &&
+      height >= 10 &&
+      width <= A4.WIDTH - 2 * A4.PADDING &&
+      height <= A4.HEIGHT - 2 * A4.PADDING
+    ) {
       imgWidth = width
       imgHeight = height
 
