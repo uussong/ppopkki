@@ -1,0 +1,58 @@
+#controller {
+  grid-area: input;
+  min-width: 285px;
+
+  form {
+    #input-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          margin-bottom: 4px;
+        }
+
+        input {
+          width: 80px;
+          border: 1px solid #eee;
+          border-radius: 6px;
+          margin: 0 0 0 5px;
+          padding: 14px 6px;
+
+          &::placeholder {
+            font-size: 14px;
+            text-align: center;
+          }
+
+          &:focus {
+            border-color: #999;
+          }
+        }
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+      }
+    }
+
+    button {
+      width: 100%;
+      border: 2px solid #eee;
+      border-radius: 6px;
+      padding: 14px 0;
+      text-align: center;
+      margin: 25px 0 0 0;
+
+      &:disabled {
+        color: #999;
+      }
+    }
+  }
+}

@@ -336,6 +336,14 @@ textarea {
     outline: none;
     box-shadow: none; }
 
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type='number'] {
+  -moz-appearance: textfield; }
+
 a,
 button {
   cursor: pointer; }
@@ -350,5 +358,43 @@ ol {
 
 address {
   font-style: normal; }
+
+#controller {
+  grid-area: input;
+  min-width: 285px; }
+  #controller form #input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; }
+    #controller form #input-group div {
+      display: flex;
+      flex-direction: column; }
+      #controller form #input-group div label {
+        margin-bottom: 4px; }
+      #controller form #input-group div input {
+        width: 80px;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        margin: 0 0 0 5px;
+        padding: 14px 6px; }
+        #controller form #input-group div input::placeholder {
+          font-size: 14px;
+          text-align: center; }
+        #controller form #input-group div input:focus {
+          border-color: #999; }
+    #controller form #input-group span {
+      display: flex;
+      align-items: center;
+      font-size: 18px; }
+  #controller form button {
+    width: 100%;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    padding: 14px 0;
+    text-align: center;
+    margin: 25px 0 0 0; }
+    #controller form button:disabled {
+      color: #999; }
 
 /*# sourceMappingURL=style.css.map */
