@@ -1,0 +1,75 @@
+#preview {
+  grid-area: preview;
+  max-width: calc(#{$a4-width} * #{$desktop-scale-factor}px);
+  min-height: calc(#{$a4-height} * #{$desktop-scale-factor}px);
+
+  @media screen and (max-width: 768px) {
+    max-width: calc(#{$a4-width} * #{$mobile-scale-factor}px);
+    min-height: calc(#{$a4-height} * #{$mobile-scale-factor}px);
+  }
+
+  #print-ref {
+    display: flex;
+    overflow: hidden;
+
+    @media print {
+      display: block;
+      width: #{$a4-width}px;
+      height: #{$a4-height}px;
+      overflow: visible;
+    }
+  }
+
+  #image-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: calc(5 * #{$desktop-scale-factor}px);
+    width: calc(#{$a4-width} * #{$desktop-scale-factor}px);
+    height: calc(#{$a4-height} * #{$desktop-scale-factor}px);
+    padding: calc(#{$a4-padding} * #{$desktop-scale-factor}px);
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px #eee;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      gap: calc(5 * #{$mobile-scale-factor}px);
+      width: calc(#{$a4-width} * #{$mobile-scale-factor}px);
+      height: calc(#{$a4-height} * #{$mobile-scale-factor}px);
+      padding: calc(#{$a4-padding} * #{$mobile-scale-factor}px);
+    }
+
+    @media print {
+      width: #{$a4-width}px;
+      height: #{$a4-height}px;
+      box-shadow: none;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #file-input {
+    display: none;
+  }
+
+  .direction {
+    position: absolute;
+    font-size: 14px;
+    bottom: 4px;
+    color: #999;
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+      bottom: 2px;
+    }
+
+    @media print {
+      display: none;
+    }
+  }
+}
