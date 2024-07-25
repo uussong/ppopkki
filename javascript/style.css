@@ -359,6 +359,21 @@ ol {
 address {
   font-style: normal; }
 
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px; }
+
+#content-wrapper {
+  display: grid;
+  grid-template-areas: 'input preview' 'print preview';
+  grid-template-columns: 2fr 3fr;
+  gap: 80px;
+  height: 100%; }
+
 #controller {
   grid-area: input;
   min-width: 285px; }
