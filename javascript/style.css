@@ -456,4 +456,17 @@ address {
       #preview .direction {
         display: none; } }
 
+#print {
+  grid-area: print;
+  display: flex;
+  align-items: flex-end; }
+  #print #print-button {
+    width: 100%;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    padding: 14px 0;
+    text-align: center; }
+    #print #print-button:disabled {
+      color: #999; }
+
 /*# sourceMappingURL=style.css.map */

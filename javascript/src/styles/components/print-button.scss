@@ -1,0 +1,17 @@
+#print {
+  grid-area: print;
+  display: flex;
+  align-items: flex-end;
+
+  #print-button {
+    width: 100%;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    padding: 14px 0;
+    text-align: center;
+
+    &:disabled {
+      color: #999;
+    }
+  }
+}
